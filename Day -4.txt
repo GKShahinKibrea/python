@@ -15,6 +15,27 @@ print(random_float)
 love_score = random.randint(1,100)
 print(f"Your love score is {love_score}")
 
+print(random.random()) # Not agrument pass ony output float number
+
+print(random.randrange(2)) # only output 0 or 1
+
+print(random.randrange(2,6)) # output 2,3,4,5
+
+# error print(random.randrange(6,2)) # output 2,3,4,5
+
+print(random.randrange(6,2,-1)) # output reverse 5,4,3,2
+# help(random) show rendom documenttation
+
+print(random.uniform(2,4)) # floting value
+T = (11,22,33)
+print(random.choice(T))
+
+print(random.choice('134'))
+
+mylist = ["apple", "banana", "cherry"]
+L = random.shuffle(mylist)
+print(mylist)
+
 # 43.[Interactive Coding Exercise] Heads or Tails
 import random 
 random_side = random.randint(0,1)
