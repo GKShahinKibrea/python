@@ -10,7 +10,7 @@ print(furit)
 52. [Interactive Coding Exercise] Average Height
 # input 151, 145, 179
 
-student_heights = input().split()
+student_heights = input().split(",")
 for n in range(0, len(student_heights)):
 	student_heights[n] = int(student_heights[n])
 
