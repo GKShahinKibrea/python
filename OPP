@@ -1,0 +1,1248 @@
+# Functions
+. A function is a block of code that only runs when it is called.
+. A function has 4 parts:
+ . Function name
+ . Parameter list
+ . Body of the function
+ . Return statement
+
+. There can be 4 types of function
+ . Bulit-in function
+ . User-defined function
+ . Lambda function
+ . Recusive function
+
+def display(*msg):
+  for x in msg:
+    print(x,end=" ")
+
+display("Python","is","fun")
+
+#==================================#
+
+def display(*msg):
+    for x in msg:
+        print(x, end=" ")
+
+
+display("Python", "is")
+print("Welcome to", end=' ')
+print("GeeksforGeeks", end=' ')
+print("GeeksforGeeks")
+
+
+def display(msg1, *msg):
+    print(msg1, end=' ')
+    print(msg)
+
+
+display("Python", "is", "fun", 2, 5)
+
+#===================================#
+def my_function(**car):
+  print("The youngest child is ", car["model"])
+
+my_function(name="Lamborghini", model="Aventador")
+
+#====================================================#
+
+def nsquare(x, y = 2):
+  return (x*x + 2*x*y + y*y)
+
+print("The square of the 2 and 2 is: ", nsquare(2))
+print("The square of the sum of 2 and 4 is", nsquare(2, 3))
+
+#==============================================#
+
+def my_func(car2, car3, car1):
+  print("3rd car is " + car1)
+
+my_func(car2="Audi", car1="BMW", car3="Ford")
+
+# Function, Variable Scope
+# Local, Global, Nonlocal
+
+a = 'global a'
+
+
+def my_funcion():
+    # a = 'local a'  # local variable
+    # a = a + ' Test'  # local variable
+    global a
+    a = a + ' Test'  # global variable
+    print(a)
+
+
+my_funcion()
+print(a)
+
+#=======================================#
+
+a = 'global a'
+
+def my_function(b):
+    print(b)
+
+my_function("local b")
+print(a)
+
+#=======================================#
+
+a = 'global a'
+
+
+def my_function():
+    print(a)
+
+
+my_function()
+print(a)
+
+#========================================#
+a = 'global a'
+
+def outer_f():
+  a = 'outer a'
+
+  def inner_f():
+    #a = 'inner a'
+    nonlocal a
+    a = a + ' test'
+    print(a)
+
+  inner_f()
+  print(a)
+
+outer_f()
+
+
+#====================Function end==========================#
+
+
+
+class Dog:
+  def __init__(self, name, id):
+    self.name = name
+    self.id = id
+  def update_name(self, name):
+    self.name = name
+  def vaiew(self):
+    print(self.name, self.id)
+
+d1 = Dog("shahin", "123")
+d1.update_name("Millon")
+d1.vaiew()
+
+#==================================================#
+__dict__
+dir(c1)
+
+class Book:
+  def __init__(self, book_name, author):
+    self.book_name = book_name
+    self.author = author
+    self.price = 0
+
+  def set_price(self, price):
+    self.price = price
+
+  def get_price(self):
+    return self.price
+
+  def details(self):
+    print("Book Name:", self.book_name ,"\nAuthor:", self.author, "\nPrice:", self.price)
+
+b1 = Book("Harry Potter", "shahin kibrea")
+b1.set_price(123)
+print(b1.get_price())
+b1.details()
+
+#==================================================#
+#Pass By reference
+class Cat:
+  def __init__(self, color, action):
+    self.color = color
+    self.action = action
+
+  def view(self):
+    print(self.color, "cat is", self.action)
+
+  def compare(self,ct):
+    if self.action == ct.action:
+      print("They are the same")
+    else:
+      print("They are different")
+      
+c1 = Cat("White","jump")
+c2 = Cat("Black","jump")
+c1.compare(c2)
+
+#====================================================#
+
+class Cat:
+  def __init__(self, color, action):
+    self.color = color
+    self.action = action
+
+  def view(self, number,clr):
+    number = number + 5
+    clrl = clr
+    clrl[0] = "Blue"
+    #clr[0] = "Blue"
+    print("Method Outside",number)
+    print("Method outside", clrl)
+
+
+colors = ["Black", "White", "Brown", "Gray" , "Orange"]
+c1 = Cat("White","Jumping")
+x = 55 
+c1.view(x, colors)
+print("Method Outside",x) # Not change reference value /pass value
+print("Method outside", colors)# change reference value/ pass by reference
+
+#============================================================#
+class Test3:
+  def __init__(self):
+    self.sum, self.y = 0, 0
+
+  def methodA(self):
+    x, y = 2, 3
+    msg = [0]
+    msg[0] = 3
+    y = self.y + msg[0]
+    self.methodB(msg, msg[0])
+    x = self.y + msg[0]
+    self.sum = x + y + msg[0]
+    print(x, y, self.sum)
+
+  def methodB(self, mg2, mg1):
+    x = 0
+    self.y = self.y + mg2[0]
+    x = x + 33 + mg1
+    self.sum = self.sum + x + self.y
+    mg2[0] = self.y + mg1
+    mg1 = mg1 + x + 2
+    print(x, self.y, self.sum)
+    
+t1 = Test3()
+t1.methodA()
+t1.methodA()
+
+#=========================================================#
+# Method Overloading:
+# Jokon akta Design class ar same namer method differnt Perameter thake
+# Python Same name overloading support kore nah
+
+class my_calculator:
+  def product(self, num1, num2=None, num3=None):
+    if num1 != None and num2 != None and num3 != None:
+      print(num1 * num2 * num3)
+    elif num1 != None and num2 != None:
+      print(num1 * num2)
+    else:
+      print(1 * num1)
+
+c1 = my_calculator()
+c1.product(4)
+c1.product(4, 5)
+c1.product(4, 5, 6)
+
+#=========================================================#
+
+# Method Overloading:
+# Jokon akta Design class ar same namer method differnt Perameter thake
+# Python Same name overloading support kore nah
+
+class my_calculator:
+  
+  def product(self, *num):
+    sum = 1
+    for x in num:
+      sum = sum * x
+    print("Product is: ", sum)
+
+c1 = my_calculator()
+c1.product(4)
+c1.product(4, 5)
+c1.product(4, 5, 6)
+
+#===========================================================#
+
+from multipledispatch import dispatch
+class my_calculator:
+  
+  @dispatch(int, int)
+  def product(self, a, b):
+    print(a * b)
+
+  @dispatch(int, int, int)
+  def product(self, a, b, c):
+    print(a * b * c)
+
+  @dispatch(str, str)
+  def product(self, a, b):
+    print(int(a) * int(b))
+
+  @dispatch(float, float, float)
+  def product(self, a, b, c):
+    print(a * b * c)
+
+
+m1 = my_calculator()
+m1.product(4, 5)
+m1.product(4, 5, 6)
+m1.product("4", "5")
+m1.product(4.0, 5.0, 6.0)
+
+#===========================================================#
+# How to achieve Constructor Overloading | Bangla
+# Error code
+
+class my_class:
+  def __init__(self, name, id):
+    self.name = name
+    self.id = id
+
+  def __init__(self, name, id, code):
+    self.name = name
+    self.id = id
+    self.code = code
+
+a = my_class("Ahsan", 1)
+a1 = my_class("Ahsan", 1, 3)
+
+#=======================================================#
+
+# How to achieve Constructor Overloading | Bangla
+
+class my_class:
+  def __init__(self, *info):
+    if len(info) == 3:
+      self.name = info[0]
+      self.id = info[1]
+      self.CGP = info[2] 
+      print("name : ", self.name, "\nID : ", self.id, "\nCGP : " , self.CGP)
+    elif len(info) == 2:
+      self.name = info[0]
+      self.id = info[1] 
+      print("name : ", self.name, "\nID : ", self.id)
+    elif len(info) == 1:
+      self.name = info[0]
+      print("name : ", self.name)
+
+a = my_class("Ahsan")
+b = my_class("Ahsan", 1)
+a1 = my_class("Ahsan", 1, 3)
+
+#================================================================#
+# How to achieve Constructor Overloading | Bangla
+
+class my_class:
+  def __init__(self, **info):
+    if len(info) == 3:
+      self.name = info["name"]
+      self.id = info["id"]
+      self.CGP = info["cgp"] 
+      print("name : ", self.name, "\nID : ", self.id, "\nCGP : " , self.CGP)
+    elif len(info) == 2:
+      self.name = info["name"]
+      self.id = info["id"] 
+      print("name : ", self.name, "\nID : ", self.id)
+    elif len(info) == 1:
+      self.name = info["name"]
+      print("name : ", self.name)
+
+# addy key **info 
+a = my_class(name = "Ahsan")
+b = my_class(name = "Ahsan", id = 1)
+a1 = my_class(name="Ahsan", id = 1, cgp = 3)
+
+#==================================================================#
+
+# Lab assignment-4
+
+class Student:
+  def __init__(self, name, ID):
+    self.name = name
+    self.ID = ID
+
+class dummy:
+  def __init__(self):
+    self.val = 0
+
+  def detail(self, std):
+    self.val = std
+
+s1 = Student("Bob", 11)
+d1 = dummy()
+
+d1.detail(s1)
+
+print(d1.val.name)
+print(d1.val.ID)
+
+#==================================================================#
+
+class Vaccine:
+  def __init__(self, name, md_in, intrvl):
+    self.name = name
+    self.md_in = md_in
+    self.intrvl = intrvl
+
+class Person:
+  def __init__(self, pname, age, ptype = "General Citizen"):
+    self.pname = pname
+    self.age = age
+    self.ptype = ptype
+    self.vac = ""
+    self.firstdose = False
+    self.seconddeos = False
+
+  def pushVaccine(self, vacN, dose = "1st dose"):
+    if dose == "1st dose":
+      if self.age >= 25 or self.ptype == "Student":
+        self.vac = vacN # storing object of vaccine / memory location
+        self.firstdose = True
+        print("1st does done for ", self.pname)
+      else:
+        print("Sorry", self.pname, "Minimum age for taking vaccines is 25 years now")
+    else:
+      if self.vac.name != vacN.name:
+        print("Sorry", self.pname, "you can't take 2 different vacciness")
+      elif self.firstdose == True:
+        self.seconddeos = True
+        print("2nd dose done for : ", self.pname)
+
+  def showDetails(self):
+    print("Name: " , self.pname, "Age: ", self.age, "Type:", self.ptype)
+    print("Vaccine Name: ", self.vac.name)
+    if self.seconddeos == True:
+      print("1st dose Given")
+      print("2nd dose Given")
+    elif self.firstdose == True:
+      print("1st dose Given")
+      print("2nd dose: Please come after", self.vac.intrvl, "days")
+
+astra = Vaccine("AstraZeneca", "UK", 60)
+modr = Vaccine("Moderna", "US", 30)
+sin = Vaccine("Sinopharm", "UK", 30)
+p1 = Person("Bob", 21, "Student")
+print("============================================")
+p1.pushVaccine(astra)
+print("============================================")
+p1.showDetails()
+print("============================================")
+p1.pushVaccine(sin, "2nd dose")
+print("============================================")
+p1.showDetails()
+print("============================================")
+p2 = Person("Carol", 23, "Actor")
+print("============================================")
+p2.pushVaccine(sin)
+print("============================================")
+p3 = Person("David", 34)
+print("============================================")
+p3.pushVaccine(modr)
+print("============================================")
+p3.showDetails()
+print("============================================")
+p3.pushVaccine(modr, "2nd Dose")
+
+#==================================================================#
+
+# Operator Overloadding
+
+
+n1 = 15
+n2 = 25
+print(n1 + n2)
+# operator oveloading
+print(n1.__add__(n2))
+print(type(n2)
+
+class data:
+  def __init__(self, x):
+    self.x = x
+
+  def __add__(self, other):
+    return self.x + other.x
+
+num1 = data(15)
+num2 = data(25)
+str1 = data('csc')
+str2 = data('101')
+print(num1 + num2)
+print(str1 + str2)
+
+class Hous:
+  def __init__(self, w, d):
+    self.windows = w
+    self.door = d
+
+  def view(self):
+    print("The house has ", self.windows, "windows and", self.door, "doors")
+
+  def __add__(self, other):
+    new_windows = self.windows + other.windows
+    new_door = self.door + other.door
+    return Hous(new_windows, new_door)
+    #return "New House has "+ str(new_windows)+ "windows and "+ str(new_door)
+
+h1 = Hous(3, 2)
+h2 = Hous(4, 1)
+h1.view()
+h2.view()
+h3 = h1 + h2 #h1.__add__(h2)
+h3.view()
+#print(h1 + h2)
+
+#========================================================#
+# Encapsulation | Public & Private variable
+
+class Student:
+  def __init__(self, name, id):
+    self.name = name # public instance variable
+    self.__id = id # private instance variable
+
+  def update_id(self, id):
+    if id > 0:
+      self.__id = id
+    else:
+      print("Invalid ID, enter id again")
+      
+  def view(self):
+    print(self.name, self.__id)
+
+s1 = Student("Jack", 1)
+#s1.id = 55 atar jonno extra instance variable create kore s1.__dict__
+#s1.id => __id __ private variable
+# id public id
+s1.update_id(555)
+s1.view()
+
+#========================================================#
+class Student:
+  def __init__(self, name, id):
+    self.name = name # public instance variable
+    self.__id = id # private instance variable
+    
+  def details(self): #instance method
+    print(self.name, self.__id)
+
+  def set_ID(self, Id):
+    if Id > 0:
+      self.__id = Id
+    else:
+      print("Invalid ID, enter id again")
+
+  def get_ID(self):
+    return self.__id
+
+  def set_Name(self, name):
+    self.name = name
+
+  def get_Name(self):
+    return self.name
+
+s1 = Student("Bob", 11)
+s2 = Student("Jane", 12)
+s2.set_ID(33)
+#print(s2.get_ID())
+s1.set_Name("Mike")
+#print(s1.get_Name())
+s1.details()
+s2.details()
+
+
+#========================================================#
+
+class Student:
+  def __init__(self, name, Id):
+    self.name = name # public instance variable
+    self.__id = Id # private instance variable
+
+  def details(self): #instance method
+    print(self.name, self.__id)
+    self.__method() 
+
+  def __method(self): # private instance method
+    print("private method executed.")
+
+
+s1 = Student("Bob", 11)
+s2 = Student("Jane", 12)
+#s1.__method()
+s1.details()
+
+#========================================================#
+
+# L20 | Python OOP | Class or Static variable
+
+class Player:
+    total_run = 0 # static or class variable
+
+    def __init__(self, run):
+        self.run = run # instance variable
+
+    def four_run(self, run):
+        self.run += run
+        Player.total_run += run
+
+    def six_run(self, run):
+        self.run += run
+        Player.total_run += run
+
+
+sakib = Player(0)
+tamim = Player(0)
+sakib.four_run(4)
+sakib.six_run(6)
+sakib.four_run(4)
+tamim.four_run(4)
+tamim.four_run(4)
+print("Sakib run :", sakib.run)
+print("Total run :", Player.total_run)
+print("Sakib run :", sakib.total_run)
+
+#========================================================#
+
+# L21 | Python OOP | Class or Static variable
+
+class Student:
+  counter = 0
+  def __init__(self, name, Id):
+    self.name = name
+    self.Id = Id
+    Student.counter += 1
+
+  def details(self):
+    print(f"Name: {self.name}, Id: {self.Id}")
+
+print("Student Count", Student.counter)
+s1 = Student("John", 1)
+s2 = Student("Carol", 22)
+s3 = Student("Mike", 33)
+
+s1.details()
+s2.details()
+s3.details()
+
+print("Student Count", Student.counter)
+
+#========================================================#
+# Exercise | OOP | CSE111 Tracing 
+
+class A:
+    temp = 4
+
+    def __init__(self):
+        self.y = self.temp - 2  # 4 - 2 = 2
+        self.sum = self.temp + 1  # 4 + 1 = 5
+        A.temp -= 2  # 2
+        self.methodA(3, 4)
+
+    def methodA(self, m, n):
+        x = 0
+        self.y = self.y + m + (self.temp)  # 2 + 3 + 2 = 7
+        A.temp += 1  # (4 + 1) = 5
+        x = x + 1 + n  # 0 + 1 + 4 = 5
+        self.sum = self.sum + x + self.y  # 5 + 5 + 7
+        print(x, self.y, self.sum)
+
+
+class B:
+    x = 0
+
+    def __init__(self, b=None):
+        self.y, self.temp, self.sum = 5, -5, 2
+        if b == None:
+            self.y = self.temp + 3  # -5 + 3 = -2
+            self.sum = 3 + self.temp + 2  # 3 - 5 + 2 = 0
+            self.temp -= 2  # 2
+        else:
+            self.sum = b.sum  # 0
+            B.x = b.x  # 0
+            b.methodB(2, 3)
+
+    def methodA(self, m, n):
+        x = 2
+        self.y = self.y + m + (self.temp) # -2 + -7 + -7 = -16
+        self.temp += 1
+        x = x + 5 + n #2 + 5 -2  = 5
+        self.sum = self.sum + x + self.y # 0 + 5 + -16 = -11
+        print(x, self.y, self.sum) #5, -16, -11
+
+    def methodB(self, m, n):
+        y = 0
+        y = y + self.y  # 0-2 = -2
+        B.x = self.y + 2 + self.temp  # -2+2-7=-7
+        self.methodA(self.x, y) # -7,-2
+        self.sum = self.x + y + self.sum# -7 + -2+-11 = -20
+        print(self.x, y, self.sum) #-7,-2,-20
+
+
+a1 = A()
+b1 = B()
+b2 = B(b1)
+b1.methodA(1, 2)
+b2.methodB(3, 2)
+#===========================================================#
+
+#=======================class method =====================#
+
+class Employee:
+    org_name = 'Google'
+
+    def __init__(self, name):
+        self.name = name
+
+    @classmethod
+    def info(cls):
+        return cls.org_name
+print(Employee.info())
+
+#===================== type of method =============
+
+class MyClass:
+  def method(self):
+    print('instance method called')
+
+  @classmethod
+  def classmethod(cls):
+    print('class method called')
+
+  @staticmethod
+  def staticmethod():
+    print('static method called')
+
+obj = MyClass()
+obj.method()
+MyClass.classmethod()
+MyClass.staticmethod()
+
+#====================================#
+
+class Student:
+    uni_name = "DUNI"
+
+    def __init__(self, name, Id):
+        self.name = name
+        self.Id = Id
+
+    def details(self):
+        print("Name : ", self.name, "ID: ", self.Id, Student.uni_name)
+
+    def up_uni_name(self, uni_name):
+        self.uni_name = uni_name
+
+    @classmethod
+    def up_uni_name_clas(cls, u_name):
+        cls.uni_name = u_name
+
+
+s1 = Student("Bob", 11)
+s2 = Student("Carol", 22)
+s1.details()
+s2.details()
+s1.up_uni_name("Brac University")
+#s1.up_uni_name("Brac University")
+s1.details()
+s2.details()
+print(s1.__dict__)
+
+#===========================Inheritance==========================#
+
+#31 Single Inheritance
+class ParentClass: # This is Base/parents Class
+  def method1(self):
+    print("This is method1 is in ParentClass.")
+  def method2(self):
+    print("This is method2 is in ParentClass.")
+
+class ChildClass(ParentClass): # This is Child/derived Class
+  def method3(self):
+    print("This is method3 is in ChildClass.")
+
+ch1 = ChildClass()
+ch1.method1()
+ch1.method2()
+ch1.method3()
+
+#=======================================================================#
+
+#32 Multilavel Inheritance
+class ParentClass:  # This is Base/parents Class
+
+    def method1(self):
+        print("This is method1 is in ParentClass.")
+
+
+class ChildClass1(ParentClass):  # This is Child1/derived1 Class
+
+    def method2(self):
+        print("This is method2 is in ChildClass1.")
+
+
+class ChildClass2(ChildClass1):  # This is Child2/derived2 Class
+
+    def method3(self):
+        print("This is method3 is in ChildClass2.")
+
+
+ch1 = ChildClass2()
+ch1.method1()
+ch1.method2()
+ch1.method3()
+#===========================================================================#
+
+#32 Hierachical Inheritance
+class ParentClass:  # This is Base/parents Class
+    def method1(self):
+        print("This is method1 is in ParentClass.")
+
+
+class ChildClass1(ParentClass):  # This is Child1/derived1 Class
+
+    def method2(self):
+        print("This is method2 is in ChildClass1.")
+
+
+class ChildClass2(ParentClass):  # This is Child2/derived2 Class
+
+    def method3(self):
+        print("This is method3 is in ChildClass2.")
+
+
+ch1 = ChildClass1() # object of ChildClass1
+ch2 = ChildClass2() # object of ChildClass2
+ch1.method1()
+ch2.method1()
+
+#===========================================================================#
+
+#32 Multiple Inheritance
+class ParentClass1:  # This is Base/parents Class1
+    def method1(self):
+        print("This is method1 is in ParentClass 1.")
+
+
+class ParentClass2:  # This is Base/parents Class2
+  def method2(self):
+      print("This is method1 is in ParentClass 2.")
+
+
+class ChildClass(ParentClass1,ParentClass2):  # Derived class
+
+    def method3(self):
+        print("This is method3 is in ChildClass")
+
+ch1 = ChildClass() # object of ChildClass1
+ch1.method1()
+ch1.method2()
+ch1.method3()
+
+#================================================================================#
+
+# Super()
+class ParentClass:
+
+    def feature1(self):
+        print("feature1 is from ParentClass .")
+ 
+    def feature2(self):
+        print("feature2 is from ParentClass .")
+
+
+class ChildClass(ParentClass):
+
+    def feature3(self):
+        super().feature1()
+        print("feature3 is from ChildClass .")
+        super().feature2()
+
+
+obj = ChildClass()
+obj.feature3()
+
+#========================================================================#
+
+# Method Overrriding
+
+class ParentClass:
+    def method1(self):
+        print("Method1 define in ParentClass")
+
+class ChildClass(ParentClass):
+    def method1(self):
+      print("Method1 define in Child Class!")
+
+obj = ChildClass()
+obj.method1()
+
+#===========================================================================#
+＃Python OOP | Inheritance | Single Inheritance 
+
+class Animal:
+
+    def __init__(self, name):
+        self.name = name
+
+    def eat(self):
+        print(self.name, "is eating")
+
+
+
+class Dog(Animal):
+
+    def bark(self):
+        print(self.name, "is barking")
+
+
+a1 = Animal("Jack")
+d1 = Dog("Rover")
+d1.bark()
+d1.eat()
+a1.eat()
+
+#isinstance(object,ClassName)
+#print(isinstance(a1, Animal))
+#issubclass(Class, ClassName)
+#print(issubclass(Animal, Dog))  # True
+print(issubclass(Dog, Animal))
+
+#============================================================#
+
+class Student:
+
+    def __init__(self, name, Id):
+        self.name = name
+        self.Id = Id
+
+    def display(self):
+        print("Name: ", self.name, "ID: ", self.Id)
+
+
+class CSEStudent(Student):
+
+    def __init__(self, name, Id, labs):
+        super().__init__(name, Id)
+        self.no_of_labs = labs
+
+    def cry(self):
+        print("CSE Student is crying because of", self.no_of_labs, "labs")
+
+
+class BBAStudent(Student):
+
+    def party(self):
+        print("All day party")
+
+
+s1 = CSEStudent("Bob", 11, 3)
+s2 = BBAStudent("Carol", 36)
+s1.display()
+s2.display()
+s1.cry()
+s2.party()
+#print(help(s2))
+
+#========================================================================#
+
+# L30 | Python OOP | Inheritance | Multilevel Inheritance
+
+
+class Student:
+
+    def __init__(self, name, Id):
+        self.name = name
+        self.id = Id
+
+    def details(self):
+        print("Name: ", self.name, "ID: ", self.id)
+
+
+class CSEStudent(Student):  #parent class
+
+    def __init__(self, name, Id, labs):
+        super().__init__(name, Id)
+        self.on_of_labs = labs
+
+    def cry(self):
+        print(self.name, "is crying because of", self.on_of_labs, "labs")
+
+
+class CSEFresher(CSEStudent):
+
+    def enroll_CSE110(self):
+        print(self.name, "is enrolling CSE110")
+
+
+s1 = CSEStudent("kibrea", 13, 3)
+s2 = CSEFresher("John", 33, 1)
+s2.cry()
+s2.details()
+s1.details()
+s2.enroll_CSE110()
+#s1.enroll_CSE110()
+
+#==========================================================================#
+#L31 | Python OOP | Inheritance | Multiple Inheritance | Bangla
+
+
+class A:
+
+    def __init__(self):
+        print("__init__ of class A")
+
+    def method1(self):
+        print("method1 of class A")
+
+
+class B:
+
+    def __init__(self):
+        print("__init__ of class B")
+
+    def method1(self):
+        print(self, "method1 of class B")
+
+
+class C(A, B):
+
+    def __init__(self):
+        #super().__init__()
+        #B.__init__(self)
+        print("__init__ of class C")
+
+    def method2(self):
+        print("method2 of class C")
+
+
+c1 = C()
+#c1.method1()
+B.method1(c1)  # reference by c1
+
+
+#==========================================================================#
+
+#L32 | Python OOP | Inheritance | Variable Overriding
+
+class Animal:
+
+  def __init__(self, name):
+    self.name = name
+    self.color = "White"
+
+  def eat(self):
+    print(self.color, self.name, "is eating")
+
+#==================================================#
+class Dog(Animal):
+  
+  def __init__(self, name, color):
+    super().__init__(name)
+    self.color = color
+
+  def bark(self):
+    print(self.color, self.name, "is barking")
+
+#==================================================#
+d1 = Dog("Tommy", "Black")
+d1.eat()
+d1.bark()
+
+#==========================================================================#
+
+# L33 | Python OOP | Inheritance | Method Overriding
+
+
+class A:
+
+    def __init__(self):
+        print("__init__ of class A")
+
+    def method1(self):
+        print("Olpo Study")
+
+    def method2(self):
+        print("You will get of my properties and methods")
+
+
+class B(A):
+
+    def __init__(self):
+        pass
+        #print("__init__ of class B")
+
+    def method1(self):
+        super().method1()
+        print("Always party.")
+
+
+b1 = B()
+b1.method1()
+b1.method2()
+
+#==========================================================================#
+
+# Exercise | OOP | CSE111 Tracing | Lab Assignment-7
+
+
+class A:
+    temp = 4
+
+    def __init__(self):
+        self.sum = 0
+        self.y = 0
+        self.y = A.temp - 2  # 2
+        self.sum = A.temp + 1  # 4 + 1 = 5
+        A.temp -= 2  # 4-2=2
+
+    def methodA(self, m, n):
+        x = 0
+        self.y = self.y + m + (A.temp)  # 2 + 1 + 2 = 5
+        A.temp += 1  # 2 + 1 = 3
+        x = x + 1 + n  # 0 + 1 + 2 = 3
+        self.sum = self.sum + x + self.y  # 5 + 3 + 5 = 13
+        print(x, self.y, self.sum)
+
+
+class B(A):
+    x = 0
+
+    def __init__(self, b=None):
+        super().__init__()
+        self.sum = 0
+        if b == None:
+            self.y = A.temp + 3
+            self.sum = 3 + A.temp + 2
+            A.temp -= 2
+        else:
+            self.sum = b.sum
+            B.x = b.x
+            b.methodB(2, 3)
+
+    def methodB(self, m, n):
+        y = 0
+        y = y + self.y
+        B.x = self.y + 2 + A.temp
+        self.methodA(B.x, y)
+        self.sum = B.x + y + self.sum
+        print(B.x, y, self.sum)
+
+
+a1 = A()
+b1 = B()
+b2 = B(b1)
+b1.methodA(1, 2)
+b2.methodB(3, 2)
+
+#======================================================================#
+
+# L34 | Pyhton OOP | __str__()
+
+class Student:
+  def __init__(self, name, Id):
+      self.name = name
+      self.id = Id
+      print(self)
+  def __str__(self):
+    return "My name is " + self.name
+
+s1 = Student("Bob", 11)
+s2 = Student("Carol", 11)
+
+# print(s1)
+#print(s2.__str__())
+
+#===============================================================#
+
+# L35 | Composition | Has-A relationship
+class Engine:
+
+    def __init__(self, cc):
+        self.capacity = cc
+
+    def start(self):
+        print("Engine started")
+
+    def stop(self):
+        print("Engine stopped")
+
+
+class Car:
+
+    def __init__(self, name, cc):
+        self.name = name
+        self.engine = Engine(cc)  # create an object
+
+    def run(self):
+      # print(self.Engine)
+      self.engine.start()
+      print("Car is running")
+
+c1 = Car("BMW", 1000)
+c1.run()
+
+#===================================================================#
+
+# L36 | Abstract Class & Method
+from abc import ABC, abstractmethod
+
+class A(ABC):
+  @abstractmethod
+  def method1(self):
+    pass
+
+class B(A):
+  @abstractmethod
+  def method2(self):
+    pass
+
+class C(B):
+  
+  def method1(self):
+    print("Method1 is overrridden")
+
+  def method2(self):
+    print("Method2 is overrridden")
+
+#b = B()
+c = C()
+c.method1()
+c.method2()
+
+#===================================================================#
+
+# L37 | Abstract Class & Method
+from abc import ABC, abstractmethod
+
+class Animal(ABC):
+  @abstractmethod
+  def make_sound(self):
+    pass
+
+  def eat(self):
+    print("I am eating")
+
+class Dog(Animal):
+  def make_sound(self):
+    print("Dog Barking")
+
+class Cat(Animal):
+  def make_sound(self):
+    print("Meow Meow")
+
+class Snake(Animal):
+  def make_sound(self):
+    print("Hiss Hiss")
+
+d1 = Dog()
+d1.eat()
+d1.make_sound()
+c1 = Cat()
+c1.eat()
+c1.make_sound()
+s1 = Snake()
+s1.make_sound()
+
